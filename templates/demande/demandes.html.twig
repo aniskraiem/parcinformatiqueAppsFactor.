@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container-fluid page-body-wrapper">
+
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="{{ path ('acceuil') }}" class="nav-link">
+                        <div class="profile-image">
+                            <div class="dot-indicator bg-success"></div>
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Apps Factor</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset ('acceuil') }}">
+                        <i class="menu-icon typcn typcn-th-large-outline"></i>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                {% if app.user.roles[0]=='admin' %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('user') }}">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Adminisrtartions</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('materiels') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Machines</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('demande') }}">
+                        <i class="menu-icon typcn typcn-shopping-bag"></i>
+                        <span class="menu-title">Tickets</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </nav>
+
+        <nav class="card-body">
+            
+            <a class="nav-link active" id="sales-statistics_switch_1" href="{{ asset('ajoutdemandes') }}">Ajouter un
+                Ticket</a>
+            </a>
+            {% for demande in demandes %}
+                <div class="card mb-4">
+
+                    <div class="card-body btn-inverse-primary">
+
+                        <h3 style="color: #1a1a1a">Ticket N°: {{ demande.id }}</h3>
+                        <div class="d-flex flex-column flex-lg-row">
+                            <h4 style="color: #1a1a1a">Titre: {{ demande.libelle }} &nbsp;&nbsp;
+                                Agent: {{ app.user.username }}
+
+                               <br><br>Nom de Machine:{{ demande.nomdemachine }}<br><br>
+                                Description: {{ demande.description }}</h4><br>
+
+
+                            <ul class="nav nav-tabs sales-mini-tabs ml-lg-auto mb-4 mb-md-0" role="tablist">
+                                <li class="nav-item">
+                                    <a href="{{ asset('statutdemandes/'  ~demande.id) }}">
+                                        <input class="btn btn-success" type="submit" style="width: 100px"
+                                               value="Clôturer"/>
+                                        <br><br>
+
+
+                                        <a href="modifdemandes/{{ demande.id }}">
+                                            <input class="btn btn-warning " type="submit" style="width: 100px"
+                                                   value="Modifier"/>
+
+                                            <br><br>
+                                            <a href="suppdemande/{{ demande.id }}">
+                                                <input class="btn btn-danger" type="submit" style="width: 100px"
+                                                       value="Supprimer"/>
+                                </li> &nbsp;
+
+                            </ul>
+                        </div>
+
+                        <div class="d-flex flex-column flex-lg-row">
+                            <div class="data-wrapper d-flex mt-2 mt-lg-0">
+
+                                <div class="wrapper pr-5">
+                                    <h4 class="mb-0" style="color: #1a1a1a">Statut: {{ demande.statut }}</h4>
+                                    <br>
+                                    <h6 class="font-weight-semibold mb-0">Date
+                                        Debut {{ demande.date|date('d-m-Y') }}</h6>
+
+                                </div>
+                                <div class="wrapper pr-5">
+                                    <h4 class="mb-0" style="color: #1a1a1a">Client: {{ demande.client }}</h4>
+                                    <br>
+                                    <h6 class="font-weight-semibold mb-0">Date
+                                        Fin {{ demande.datelimite|date('d-m-Y') }}</h6>
+
+                                </div>
+                                <br>
+                                <br>
+
+                            </div>
+                            <br>
+                            <br>
+                            <br><br>
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </nav>
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container-fluid page-body-wrapper" >
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar"   >
+            <ul class="nav" >
+                <li class="nav-item nav-profile">
+                    <a href="{{ path ('acceuil') }}" class="nav-link">
+                        <div class="profile-image">
+                            <div class="dot-indicator bg-success"></div>
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Apps Factor</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset ('acceuil') }}">
+                        <i class="menu-icon typcn typcn-th-large-outline"></i>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                {% if app.user.roles[0]=='admin' %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('user') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Adminisrtartions</span>
+                    </a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('materiels') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Machines</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('demande') }}">
+                        <i class="menu-icon typcn typcn-shopping-bag"></i>
+                        <span class="menu-title">Tickets</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
+        <nav class="main-panel">
+            <div class="center">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Machines</h4>
+                                        <p class="font-weight-semibold mb-0"><a href="{{ path('materiels') }}" >Consulter</a></p>
+
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set m=0 %}
+                                        {% for materiel in materiels %}
+                                            {% set m=m+1 %}
+
+                                        {% endfor %}
+                                        {{ m }}
+
+                                    </h3>
+                                </div>
+                                <div class="" height="" id="total-revenue"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total d'Utilisateur</h4>
+                                        <p class="font-weight-semibold mb-0"><a href="{{ path('user') }}" >Consulter</a>
+                                        </p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+
+                                        {% set u=0 %}
+                                        {% for user in users %}
+
+                                            {% set u=u+1 %}
+
+                                        {% endfor %}
+                                        {{ u }}
+                                    </h3>
+                                </div>
+                                <canvas class="" height="" id="total-transaction"></canva>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Tickets</h4>
+                                        <p class="font-weight-semibold mb-0"><a href="{{ path('demande') }}" >Consulter</a></p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set d=0 %}
+                                        {% for demande in demandes %}
+
+                                                {% set d=d+1 %}
+
+                                        {% endfor %}
+                                        {{ d }}
+                                    </h3>
+                                </div>
+                                <canvas class="" height="" id="total-revenue"></canva>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Nouveaux Tickets</h4>
+                                        <p class="font-weight-semibold mb-0"></p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set d=0 %}
+                                        {% for demande in demandes %}
+                                            {% if demande.statut == 'Nouveau' %}
+                                                {% set d=d+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ d }}
+                                    </h3>
+                                </div>
+                                <canvas class="" height="" id="total-revenue"></canva>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Tickets Résolus</h4>
+                                        <p class="font-weight-semibold mb-0">
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center"> {% set d=0 %}
+                                        {% for demande in demandes %}
+                                            {% if demande.statut == 'Résolu' %}
+                                                {% set d=d+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ d }}</p></h3></div>
+                                <canvas class="" height="" id="total-transaction"></canva>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Tickets En Cours</h4>
+                                        <p class="font-weight-semibold mb-0"></p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set d=0 %}
+                                        {% for demande in demandes %}
+                                            {% if demande.statut == 'En Cours' %}
+                                                {% set d=d+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ d }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Tickets Fermés</h4>
+                                        <p class="font-weight-semibold mb-0"></p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set d=0 %}
+                                        {% for demande in demandes %}
+                                            {% if demande.statut == 'Fermé' %}
+                                                {% set d=d+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ d }}
+                                    </h3>
+                                </div>
+                                <canvas class="" height="" id="total-revenue"></canva>
+                            </div>
+                        </div>
+                        <div class="col-md-6 grid-margin stretch-card">
+                            <div class="card-body btn-inverse-success">
+                                <div class="card-body pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mb-0">Nombre Total des Tickets Rejetés</h4>
+                                        <p class="font-weight-semibold mb-0"></p>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <h3 class="text-center">
+                                        {% set d=0 %}
+                                        {% for demande in demandes %}
+                                            {% if demande.statut == 'Rejeté' %}
+                                                {% set d=d+1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ d }}
+                                    </h3>
+                                </div>
+                                <canvas class="" height="" id="total-revenue"></canva>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </nav>
+    </div>
+
+{% endblock %}

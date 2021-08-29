@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="{{ path ('acceuil') }}" class="nav-link">
+                        <div class="profile-image">
+                            <div class="dot-indicator bg-success"></div>
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Apps Factor</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset ('acceuil') }}">
+                        <i class="menu-icon typcn typcn-th-large-outline"></i>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                {% if app.user.roles[0]=='admin' %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ asset('user') }}">
+                            <i class="menu-icon typcn typcn-document-text"></i>
+                            <span class="menu-title">Adminisrtartions</span>
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('materiels') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Machines</span>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('demande') }}">
+                        <i class="menu-icon typcn typcn-shopping-bag"></i>
+                        <span class="menu-title">Tickets</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
+
+
+        <nav class="main-panel">
+
+
+            <a style="align-content: center"><h1 style="color: cornflowerblue;text-align: center">
+                    Liste des Machines </h1></a>
+
+            <br>
+            <br>
+            <h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                <a class="" style="color: #0b3251" href="{{ asset('ajoutmateriels') }}">Ajouter Une Nouvelle Machine
+                </a>
+
+
+                </a>
+            </h4>
+
+            <br>
+
+
+            <div class="center">
+                <table class="table btn-inverse-success" style="border-color: #3c90be " border="">
+
+                    <thead style="color:#850919">
+                    <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Agent</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for materiel in materiels %}
+
+                        <tr>
+                            <td>{{ materiel.id }}</td>
+                            <td>{{ materiel.type }}</td>
+                            <td>{{ app.user.username }}</td>
+                            <td>{{ materiel.statut }}</td>
+
+                            <td><a href="detailsmateriels/{{ materiel.id }}">
+                                    <input class="btn btn-warning " type="submit" style="width:130px" value="Show"/><br><br>
+                                    <a href="modifmateriels/{{ materiel.id }}">
+                                        <input class="btn btn-primary " type="submit" style="width:130px"
+                                               value="Modifier"/><br><br> <a href="suppmateriel/{{ materiel.id }}">
+                                            <input class="btn btn-danger" style="width:130px" type="submit"
+                                                   value="Supprimer"/>
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+    </div>
+    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp;
+    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp; &nbsp; &nbsp;
+    &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+    &nbsp; &nbsp;&nbsp;&nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+
+
+    </nav>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}
+

@@ -1,0 +1,166 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block body %}
+
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="{{ path ('acceuil') }}" class="nav-link">
+                        <div class="profile-image">
+                            <div class="dot-indicator bg-success"></div>
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Apps Factor</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset ('acceuil') }}">
+                        <i class="menu-icon typcn typcn-th-large-outline"></i>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('user') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Adminisrtartions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('materiels') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Machines</span>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('demande') }}">
+                        <i class="menu-icon typcn typcn-shopping-bag"></i>
+                        <span class="menu-title">Tickets</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
+
+        <nav class="main-panel">
+
+
+            <form action="" method="post">
+                <div class="center" style="border: 800px" border="2">
+                    <div class="card card-body bg-twitter" action="" method="post">
+                        <div class="form-group">
+                            <h1 style="text-align: center"> Modifier une Machine</h1><br><br>
+                    <div class="input-group">
+                        <label for="start"><h4>Type :<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <select name="type" id="type-select" required >
+                            <option label="choisissez type de la machine "  ></option>
+                            <option value="PC">PC</option>
+                            <option value="Tablette">Tablette</option>
+                            <option value="PC Portable  ">PC Portable</option>
+
+                        </select>
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Modéle et Caractéristiques: <abbr title="Ce champ est obligatoire">*</abbr></h4></label>
+
+                        <input type="text" maxlength="300" required name="caracts" style="display: inline" value="{{ materiels.modele }}" class="form-control" ></input>
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Adresse Mac : <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="text" name="adressemac" required class="form-control" value="{{ materiels.addmac }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Adresse IP : <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="text" name="adresseip" required class="form-control" value="{{ materiels.addip }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Date D'Affectation: <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input value="" name="dateaffectation" required type="date" class="form-control" value="{{ materiels.dateacc|date("m/d/y") }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Date Prevu Hors Service: <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="date" name="dateexp" required class="form-control" value="{{ materiels.datefin|date("m/d/y") }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Applications Installées : <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="text" name="apps" size="200" required class="form-control" value="{{ materiels.apps }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                </div>
+                <div class="form-group d-flex justify-content-center">
+                    <div class="form-check form-check-flat mt-0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary submit-btn btn-block">Submit</button>
+                </div>
+
+            </form>
+        </nav>
+    </div>
+
+{% endblock %}

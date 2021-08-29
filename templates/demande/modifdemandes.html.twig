@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item nav-profile">
+                    <a href="{{ path ('acceuil') }}" class="nav-link">
+                        <div class="profile-image">
+                            <div class="dot-indicator bg-success"></div>
+
+                        </div>
+                        <div class="text-wrapper">
+                            <p class="profile-name">Apps Factor</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="nav-item nav-category">Main Menu</li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset ('acceuil') }}">
+                        <i class="menu-icon typcn typcn-th-large-outline"></i>
+                        <span class="menu-title">Accueil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('user') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Adminisrtartions</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('materiels') }}">
+                        <i class="menu-icon typcn typcn-document-text"></i>
+                        <span class="menu-title">Machines</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ asset('demande') }}">
+                        <i class="menu-icon typcn typcn-shopping-bag"></i>
+                        <span class="menu-title">Tickets</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </nav>
+
+        <nav class="main-panel">
+
+            <form>
+
+                <div class="center" style="border: 800px" border="2">
+                    <div class="card card-body bg-facebook">
+                        <div class="form-group">
+                            <h1 style="text-align: center">Modifier un Ticket</h1><br><br>
+                    <div class="input-group">
+                        <label for="start"><h4> Titre: <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="titre"  required title="" class="form-control" value="{{ demandes.libelle }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Statut : &nbsp<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <select name="statut" id="type-select"  required>
+                            <option label="choisissez statut " ></option>
+                            <option value="Nouveau">Nouveau</option>
+                            <option value="En Cours">En Cours</option>
+                            <option value="Fermé">Fermé</option>
+                            <option value="Rejeté">Rejeté</option>
+
+                            <option value="Résolu">Résolu</option>
+
+                        </select>
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Client: &nbsp<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="client" size="200" required class="form-control" value="{{ demandes.client }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Date Debut: &nbsp<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input value="" name="dateD" type="date" required class="form-control" placeholder="Date D'Affectation">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Date d'échéance:<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="date" name="dateF" required class="form-control" value="{{ demandes.datelimite|date('d/m/Y') }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Nom de Machine: <abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="nomdemachine" size="200" required class="form-control" value="{{ demandes.nomdemachine }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <label for="start"><h4>Description: &nbsp<abbr title="Ce champ est obligatoire">*</abbr></h4></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <input type="text" name="desc" size="200" required class="form-control"value="{{ demandes.description }}">
+                        <div class="input-group-append">
+                        <span class="input-group-text">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button class="btn btn-success submit-btn btn-block">Submit</button>
+                </div>
+
+            </form>
+        </nav>
+    </div>
+
+{% endblock %}
